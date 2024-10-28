@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <style>
+    body {
+      background-color: black;
+      color: #00FF00;
+      font-family: monospace;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #terminal {
+      background-color: black;
+      border: 2px solid #00FF00;
+      padding: 20px;
+      width: 600px;
+      max-width: 90%;
+      box-sizing: border-box;
+    }
+
+    .log {
+      white-space: pre-wrap;
+      line-height: 1.5;
+    }
+
+    .music-control {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    button {
+      background-color: black;
+      color: #00FF00;
+      border: 1px solid #00FF00;
+      padding: 5px 10px;
+      cursor: pointer;
+      font-family: monospace;
+    }
+
+    button:hover {
+      background-color: #00FF00;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <div id="terminal">
+    <div class="log" id="log"></div>
+    
+    <div class="music-control">
+      <audio id="music" src="musica.mp3" loop></audio>
+      <button onclick="toggleMusic()">Play/Pause Música</button>
+    </div>
+  </div>
+
+  <script>
+    const music = document.getElementById("music");
+    const logElement = document.getElementById("log");
+
+    const messages = [
+      "conectando [........................]",
+      "conectando [##......................]",
+      "conectando [#########...............]",
+      "conectando [##############..........]",
+      "conectando [###################.....]",
+      "conectando [########################]",
+      "conexão segura estabelecida!",
+      "[xx:xx:xx] - ob3servador: CARA VC NÃO VAI ACREDITAR!!!!!",
+      "[xx:xx:xx] - ob3servador: olha o que achei fuçando no banco de dados aqui",
+      "[xx:xx:xx] - ob3servador: Parece ser algo relacionado aos acontecimentos antigos!",
+      "[xx:xx:xx] - ob3servador: Sabe aquele negocio das torres então ele parece que voltou!",
+      "[xx:xx:xx] - Para37t1: Mas isso seria o que?",
+      "[xx:xx:xx] - ob3servador: OLHA ISSO",
+      "[xx:xx:xx] - ob3servador: MENSAGEM BLOQUEADA POR ????",
+      "[xx:xx:xx] - ob3servador: MENSAGEM BLOQUEADA POR ????",
+      ".",
+      ".",
+      ".",
+      "[xx:xx:xx] - Para37t1: vish....",
+      "[xx:xx:xx] - Para37t1: isso ai eh bem maior do que eu imaginava",
+      "[xx:xx:xx] - Para37t1: mas parece que finalmente nosso esforço está sendo recompensado",
+      ".",
+      ".",
+      ".",
+      "[xx:xx:xx] - SISTEMA: usuário S3u_Pi5r_P3sad1l2 entrou na sala",
+      ".",
+      "[xx:xx:xx] - ob3servador: ih, quem é esse maluco?",
+      "[xx:xx:xx] - Para37t1: não sei?? como ele entrou aqui?",
+      "[xx:xx:xx] - S3u_Pi5r_P3sad1l2: o dia está chegando.",
+      "[xx:xx:xx] - ob3servador: dia do que, doidão?",
+      "[xx:xx:xx] - S3u_Pi5r_P3sad1l2: a revelação se aproxima.",
+      "[xx:xx:xx] - S3u_Pi5r_P3sad1l2: eu vejo vocês sexta feira.",
+      "[xx:xx:xx] - SISTEMA: usuário S3u_Pi5r_P3sad1l2 saiu da sala",
+      "[xx:xx:xx] - Para37t1: ?????",
+      "[xx:xx:xx] - ob3servador: papo reto o que foi isso?",
+      "conexão encerrada!"
+    ];
+
+    let messageIndex = 0;
+    let charIndex = 0;
+
+    function typeMessage() {
+      if (messageIndex < messages.length) {
+        const currentMessage = messages[messageIndex];
+        if (charIndex < currentMessage.length) {
+          logElement.innerHTML += currentMessage[charIndex];
+          charIndex++;
+          setTimeout(typeMessage, 50); // Controla a velocidade de digitação
+        } else {
+          logElement.innerHTML += "<br>";
+          charIndex = 0;
+          messageIndex++;
+          setTimeout(typeMessage, 500); // Pausa entre mensagens
+        }
+      }
+    }
+
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+      } else {
+        music.pause();
+      }
+    }
+
+    // Inicia a digitação ao carregar a página
+    window.onload = typeMessage;
+  </script>
+</body>
+</html>
